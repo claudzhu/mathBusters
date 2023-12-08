@@ -14,7 +14,7 @@ public class Math : MonoBehaviour
 
     private int opt1;
     private int opt2;
-    private int correct;
+    public int correct;
     private int otherFlag;
     private int otherFlag2;
     private TextMeshProUGUI[] shuffleFlag;
@@ -38,11 +38,13 @@ public class Math : MonoBehaviour
         opt2 = Random.Range(-50, 51);
         correct = opt1 + opt2;
         otherFlag = Random.Range(correct - 10, correct + 10);
-        if (otherFlag == correct){
+        if (otherFlag == correct)
+        {
             otherFlag += Random.Range(1, 6);
         }
         otherFlag2 = Random.Range(correct - 10, correct + 10);
-        if (otherFlag2 == correct){
+        if (otherFlag2 == correct)
+        {
             otherFlag2 += Random.Range(1, 6);
         }
         shuffleFlag = new TextMeshProUGUI[] { answer1, answer2, answer3 };
