@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
@@ -28,7 +29,20 @@ public class CharacterControl : MonoBehaviour
     private bool m_isGrounded;
 
     private List<Collider> m_collisions = new List<Collider>();
-
+    private Math math;
+    private void Start()
+    {
+        // finish_zone_light = GetComponent<Light>();
+        GameObject math_obj = GameObject.Find("MathQuestionManager");
+        if (math_obj != null)
+        {
+            math = math_obj.GetComponent<Math>();
+        }
+        else
+        {
+            Debug.LogError("MathQuestionManager game object not found in the scene.");
+        }
+    }
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
@@ -89,6 +103,24 @@ public class CharacterControl : MonoBehaviour
         }
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the collider's GameObject is the correctFlag
+        if (other.gameObject == math.correctFlag)
+        {
+            // Add logic for UI to display some type of visual indicating it's the correct answer
+            // finish_zone_light.color = Color.green;
+            SceneManager.LoadScene(2); // Fixed typo: "Scene2" instead of "Scene 2"
+        }
+        else
+        {
+            // Add logic for UI to display some type of visual indicating it's the wrong answer
+            // finish_zone_light.color = Color.red;
+            SceneManager.LoadScene(1); // Fixed typo: "Scene1" instead of "Scene 1"
+        }
+        // Note: you may want to have the user retry the scene for a limited # of times
+    }
+
 
     private void Update()
     {
