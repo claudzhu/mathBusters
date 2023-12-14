@@ -108,19 +108,18 @@ public class CharacterControl : MonoBehaviour
         // Check if the collider's GameObject is the correctFlag
         if (other.gameObject == math.correctFlag)
         {
-            // Add logic for UI to display some type of visual indicating it's the correct answer
-            // finish_zone_light.color = Color.green;
+            other.gameObject.GetComponent<Light>().color = Color.green; // Green light to indicate correct answer
+            // display UI that says Level 1 Clear! Go to next level
             SceneManager.LoadScene(2); // Fixed typo: "Scene2" instead of "Scene 2"
         }
         else
         {
-            // Add logic for UI to display some type of visual indicating it's the wrong answer
-            // finish_zone_light.color = Color.red;
+            other.gameObject.GetComponent<Light>().color = Color.red; // red light to indicate incorrect answer
+            // display UI that has two options: retry, quit
             SceneManager.LoadScene(1); // Fixed typo: "Scene1" instead of "Scene 1"
         }
         // Note: you may want to have the user retry the scene for a limited # of times
     }
-
 
     private void Update()
     {
